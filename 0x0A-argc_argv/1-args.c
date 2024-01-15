@@ -10,13 +10,9 @@
  */
 int main(int argc, char *argv[])
 {
-	int i;
+	(void) argv; /*Ignore argv*/
+	printf("%d\n", argc - 1);
 
-	printf("no of raguements %d\n", argc);
-	for (i = 1; i < argc; i++)
-	{
-		printf("%s", argv[i]);
-	}
-	printf("\n");
 	return (0);
 }
+
