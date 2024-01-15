@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	int i;
 
 	printf("no of raguements %d\n", argc);
-	for (i = 1; i <  argc - 1; i++)
+	for (i = 1; i < argc; i++)
 	{
 		printf("%s", argv[i]);
 	}
