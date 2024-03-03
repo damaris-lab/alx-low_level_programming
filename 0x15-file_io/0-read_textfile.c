@@ -1,26 +1,46 @@
-#include <unistd.h>
-#include <stdio.h>
-
+#include "main.h"
 /**
- * read_textfile - read text file and output it on posix
- * @filename: file pointer
- * @letters:letters to print
- * Return:number of letters
+ * read_textfile - reads a textfilemand prints it the posix stdout
+ * @filename: name of the file
+ * @letters: number of letters to be read and print
+ *
+ * Return: number of letters read and printed.
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	file *ptr;
-	char buffer;
-	char buflen = 0;
+	int fd;
+	char *buf;
+	ssize_t rbytes;
+	ssize_t count;
 
-	if (ptr == NULL)
-		return (0);
-	ptr = fopen("filename", "r");
-	while ((letters = getline(&buffer, &buflen, ptr)) != -1)
+	count = 0;
+
+	buf = malloc(sizeof(char) * letters);
+	if (!buf)
 	{
-		fwrite(buffer, sizeof(char), letters, stdout);
+		free(buf);
+		return (0);
 	}
-	free(buffer);
-	return (0);
+	if (!filename)
+	{
+		free(buf);
+		return (0);
+	}
+	else
+		fd = open(filename, O_RDONLY);
+	rbytes = read(fd, buf, letters);
+	if (rbytes == -1 || fd == -1)
+	{
+		free(buf);
+		return (0);
+	}
+	count = write(STDOUT_FILENO, buf, rbytes);
+	if (count != rbytes || count == -1)
+	{
+		free(buf);
+		return (0);
+	}
+	free(buf);
+	close(fd);
+	return (count);
 }
-
