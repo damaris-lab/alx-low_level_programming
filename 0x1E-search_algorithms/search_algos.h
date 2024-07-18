@@ -6,5 +6,6 @@ void print_search_section(int *array, int left, int right);
 int binary_search(int *array, size_t size, int value);
 int search_block(int *array, int left, int right, int value);
 int jump_search(int *array, size_t size, int value);
-
+int interpolation_search(int *array, size_t size, int value);
+skiplist_t *linear_skip(skiplist_t *list, int value);
 #endif
